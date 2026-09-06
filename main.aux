@@ -30,6 +30,7 @@
 \citation{milano2010,sauer2018}
 \citation{sauer2018}
 \citation{cui2021}
+\citation{yu2026supplement}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation}{2}{section.2}\protected@file@percent }
 \newlabel{sec:prelim}{{II}{2}{Problem Formulation}{section.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Transient Prediction Based on TDS}{2}{subsection.2.1}\protected@file@percent }
@@ -71,6 +72,7 @@
 \newlabel{eq:direct}{{5}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.5}{}}
 \newlabel{eq:alternating}{{6}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.6}{}}
 \citation{chenNeuralOrdinaryDifferential2018}
+\citation{yu2026supplement}
 \citation{hornik1991}
 \citation{khalil2002}
 \@writefile{toc}{\contentsline {section}{\numberline {III}The Physics-prior Neural ODE Surrogate}{4}{section.3}\protected@file@percent }
@@ -85,6 +87,7 @@
 \newlabel{prop:bounded}{{1}{4}{}{proposition.1}{}}
 \newlabel{eq:ultbound}{{10}{4}{}{equation.10}{}}
 \citation{milano2010}
+\citation{yu2026supplement}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}The Initial Value of the Latent Variables}{5}{subsection.3.3}\protected@file@percent }
 \newlabel{ssec:delta0}{{\mbox  {III-C}}{5}{The Initial Value of the Latent Variables}{subsection.3.3}{}}
 \newlabel{eq:phasor}{{11}{5}{The Initial Value of the Latent Variables}{equation.11}{}}
@@ -94,6 +97,7 @@
 \newlabel{ssec:training}{{\mbox  {III-D}}{5}{Port-Only Training}{subsection.3.4}{}}
 \newlabel{eq:loss}{{14}{5}{Port-Only Training}{equation.14}{}}
 \citation{klopfensteinNumericalDifferentiationFormulas1971}
+\citation{yu2026supplement}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Surrogate Spliced Direct Simulation}{6}{section.4}\protected@file@percent }
 \newlabel{sec:spliced}{{IV}{6}{Surrogate Spliced Direct Simulation}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}The Integrator and Its Simplified Newton Iteration}{6}{subsection.4.1}\protected@file@percent }
@@ -108,6 +112,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {V}Case Study}{6}{section.5}\protected@file@percent }
 \newlabel{sec:exp}{{V}{6}{Case Study}{section.5}{}}
 \citation{milano2010}
+\citation{yu2026supplement}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Learning the Model Family from Exact Parameters}{7}{subsection.5.1}\protected@file@percent }
 \newlabel{ssec:exp_orders}{{\mbox  {V-A}}{7}{Learning the Model Family from Exact Parameters}{subsection.5.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces NRMSE of the Spliced Simulation against the Full-Physics Reference for a Stable and an Unstable Clearing}}{7}{table.2}\protected@file@percent }
@@ -127,17 +132,18 @@
 \newlabel{fig:cct_npcc}{{5}{8}{Deviation of the spliced CCT from the full-physics CCT on seven fault scenarios of the NPCC system, where F and L denote the faulted bus and the tripped line}{figure.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Family Training on a 2224-Bus System}{8}{subsection.5.3}\protected@file@percent }
 \newlabel{ssec:exp_scale}{{\mbox  {V-C}}{8}{Family Training on a 2224-Bus System}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Cost of the Spliced Simulation}{8}{subsection.5.4}\protected@file@percent }
+\newlabel{ssec:exp_cost}{{\mbox  {V-D}}{8}{Cost of the Spliced Simulation}{subsection.5.4}{}}
 \citation{xiaoFeasibilityStudyNeural2023,wangConvergenceEnhancementNeural2025}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Critical clearing times of eight fault scenarios of the 2224-bus system in the full-physics and in the spliced system, labeled as in Fig.~\ref {fig:cct_npcc}.}}{9}{figure.6}\protected@file@percent }
 \newlabel{fig:cct_gb}{{6}{9}{Critical clearing times of eight fault scenarios of the 2224-bus system in the full-physics and in the spliced system, labeled as in Fig.~\ref {fig:cct_npcc}}{figure.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Spliced simulation of the 2224-bus system against the full-physics reference for a stable and an unstable clearing of the same fault scenario.}}{9}{figure.7}\protected@file@percent }
 \newlabel{fig:gb_traj}{{7}{9}{Spliced simulation of the 2224-bus system against the full-physics reference for a stable and an unstable clearing of the same fault scenario}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Cost of the Spliced Simulation}{9}{subsection.5.4}\protected@file@percent }
-\newlabel{ssec:exp_cost}{{\mbox  {V-D}}{9}{Cost of the Spliced Simulation}{subsection.5.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-D}1}Splicing the proposed surrogate leaves the simulation cost nearly unchanged}{9}{subsubsection.5.4.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Wall Clock of the Spliced Simulation Relative to the Full-Physics Simulation on an Unstable Clearing}}{9}{table.3}\protected@file@percent }
 \newlabel{tab:wall}{{III}{9}{Wall Clock of the Spliced Simulation Relative to the Full-Physics Simulation on an Unstable Clearing}{table.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-D}2}Implicit integration reduces the neural evaluations}{9}{subsubsection.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-D}3}Symbolic differentiation lowers the cost of each call}{9}{subsubsection.5.4.3}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{refs}
 \bibcite{cuiFrequencyDomainApproach2024}{1}
@@ -162,13 +168,13 @@
 \bibcite{milano2010}{20}
 \bibcite{sauer2018}{21}
 \bibcite{cui2021}{22}
-\bibcite{hornik1991}{23}
-\bibcite{khalil2002}{24}
-\bibcite{klopfensteinNumericalDifferentiationFormulas1971}{25}
-\bibcite{steinebachConstructionRosenbrockWanner2023}{26}
+\bibcite{yu2026supplement}{23}
+\bibcite{hornik1991}{24}
+\bibcite{khalil2002}{25}
+\bibcite{klopfensteinNumericalDifferentiationFormulas1971}{26}
+\bibcite{steinebachConstructionRosenbrockWanner2023}{27}
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Integrator Work per Run on the 2224-Bus Full-Physics System for a Stable Clearing}}{10}{table.4}\protected@file@percent }
 \newlabel{tab:work}{{IV}{10}{Integrator Work per Run on the 2224-Bus Full-Physics System for a Stable Clearing}{table.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-D}3}Symbolic differentiation lowers the cost of each call}{10}{subsubsection.5.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{10}{section.6}\protected@file@percent }
 \newlabel{sec:conclusion}{{VI}{10}{Conclusion}{section.6}{}}
 \@writefile{toc}{\contentsline {section}{References}{10}{section*.1}\protected@file@percent }
