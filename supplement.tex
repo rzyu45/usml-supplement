@@ -19,10 +19,6 @@
 \renewcommand{\thetable}{S\Roman{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-\theoremstyle{plain}
-\newtheorem{proposition}{Proposition}
-\renewcommand{\theproposition}{S\arabic{proposition}}
-
 \begin{document}
 
 \title{Supplementary Material for ``Constructing Machine Surrogates for Power System Transient Prediction from Limited Measurements: A Physics-Prior Neural ODE Approach''}
@@ -34,7 +30,6 @@
 This document supplements the main text.
 Section~\ref{sec:family} lists the synchronous machine models of the family in full.
 Section~\ref{sec:proof} proves Proposition~\ref{M-prop:bounded} of the main text.
-Section~\ref{sec:order} shows that the learned rotor model represents the reduced-order members of the family.
 Section~\ref{sec:grad} gives the gradient of the port-only loss.
 Section~\ref{sec:ndf} gives the numerical differentiation formula and its residual equation.
 Section~\ref{sec:params} lists the parameters of the IEEE 14-bus case study.
@@ -157,62 +152,6 @@ Every eigenvalue of $\bm{\Lambda}$ is negative, so constants $k\ge1$ and $\lambd
 The variation-of-constants formula gives $\bm{x}_r(t)=e^{\bm{\Lambda}t}\bm{x}_r(0)+\int_0^{t}e^{\bm{\Lambda}(t-s)}\bm{w}(s)\,\mathrm{d}s$.
 Bounding the integrand by $ke^{-\lambda(t-s)}\lVert\bm{w}\rVert_2$ and integrating yields \eqref{M-eq:ultbound}.
 \end{proof}
-
-\section{Representation of the Reduced-Order Members}\label{sec:order}
-
-The learned rotor model \eqref{M-eq:closure} is built on the rotor states of the sixth-order Sauer--Pai model.
-This section shows that the reduced-order members of Table~\ref{M-tab:variants} lie inside the family that the surrogate realizes, so fitting their records incurs no structural error.
-
-\begin{proposition}\label{prop:order}
-Let $\mathcal{S}$ collect the machine models that the hardcoded equations \eqref{M-eq:sm} together with \eqref{M-eq:closure} and \eqref{M-eq:rtheta} of the main text realize as the learnable physical parameters take positive values and the network weights take real values.
-Every reduced-order member of Table~\ref{M-tab:variants} is then either a member of $\mathcal{S}$ or approximated by members of $\mathcal{S}$ to any prescribed accuracy, as follows.
-The two-axis and the one-axis models belong to $\mathcal{S}$.
-For the classical model, any compact operating region $\mathcal{K}$, and any $\varepsilon>0$, there is a member of $\mathcal{S}$ whose state equations differ from those of the classical model by less than $\varepsilon$ on $\mathcal{K}$.
-Started from the same state, the two models then stay within $\varepsilon\bigl(e^{\kappa t}-1\bigr)/\kappa$ of each other at time $t$ while inside $\mathcal{K}$, where $\kappa$ is a Lipschitz constant of the classical state equations on $\mathcal{K}$.
-\end{proposition}
-
-\begin{proof}
-Consider first the two-axis model.
-Choose $X_d''=X_d'$ and $X_q''=X_q'$, and set the network output to zero, $\bm{r}_{\bm{\theta}}=\bm{0}$.
-The EMF-map coefficients \eqref{eq:ab} become $a_d=a_q=1$ and $b_d=b_q=0$, so the EMF map reduces to $E_q''=E_q'$ and $E_d''=E_d'$, and the damper states $\psi_{1d}$ and $\psi_{2q}$ no longer appear in it.
-The stator and torque equations contain the rotor state only through $E_q''$ and $E_d''$, the first two rows of \eqref{M-eq:AB} contain only $E_q'$ and $E_d'$, and the one remaining path, the network input, is closed because $\bm{r}_{\bm{\theta}}=\bm{0}$.
-The damper states therefore appear nowhere except in their own rows,
-\begin{equation}\label{eq:damper-rows}
-\begin{aligned}
-T_{d0}''\dot\psi_{1d}&=-\psi_{1d}+E_q'-(X_d'-X_l)I_d,\\
-T_{q0}''\dot\psi_{2q}&=-\psi_{2q}-E_d'-(X_q'-X_l)I_q.
-\end{aligned}
-\end{equation}
-Each row of \eqref{eq:damper-rows} is stable and influences no other equation, so the two damper states are inert and removing them changes no other variable.
-Substituting $E_q''=E_q'$, $E_d''=E_d'$, $X_d''=X_d'$, and $X_q''=X_q'$ into the stator and torque equations of \eqref{M-eq:sm} yields the interface of \eqref{eq:twoaxis}, and the remaining dynamics are the first two rows of \eqref{M-eq:AB}, namely $T_{d0}'\dot E_q'=-E_q'-(X_d-X_d')I_d+E_{fd}$ and $T_{q0}'\dot E_d'=-E_d'+(X_q-X_q')I_q$.
-These are exactly the states, rotor equations, and interface of the two-axis model \eqref{eq:twoaxis}, so the two-axis model belongs to $\mathcal{S}$.
-
-Consider next the one-axis model.
-Keep the choices above and set $X_q'=X_q$ in addition.
-The $E_d'$ row then loses its input term and reduces to $T_{q0}'\dot E_d'=-E_d'$.
-Every simulation starts from the rotor equilibrium of Section~\ref{M-ssec:delta0} of the main text, where $E_d'=0$, and the reduced row keeps $E_d'$ at zero for all time.
-With $E_d'\equiv0$ and $X_q'=X_q$, the interface of \eqref{eq:twoaxis} becomes that of \eqref{eq:oneaxis}, and the only remaining rotor equation is the $E_q'$ row.
-This is exactly the one-axis model, so it belongs to $\mathcal{S}$.
-
-Consider finally the classical model.
-Choose $X_d''=X_q''=X_q'=X_d'$, which makes the interface isotropic with the single reactance $X_d'$.
-The classical model further requires $E_q'$ to stay at a constant value and $E_d'$ to stay at zero, which the linear rows alone do not deliver, and the network supplies it.
-The correction that achieves this exactly is $r_1=E_q'+(X_d-X_d')I_d-E_{fd}$ and $r_2=-(X_q-X_d')I_q$, since substituting $r_1$ into the $E_q'$ row gives $\dot E_q'=0$, and substituting $r_2$ into the $E_d'$ row gives $T_{q0}'\dot E_d'=-E_d'$, which holds $E_d'$ at its equilibrium value of zero as before.
-The classical machine admits no field-voltage input, so $E_{fd}$ is a constant and $r_1$ is a function of $E_q'$ and $I_d$ alone.
-The pair $r_1,r_2$ is therefore a continuous function of the network inputs, bounded on $\mathcal{K}$, and a network of the form \eqref{M-eq:rtheta} whose bound $\bm{c}$ exceeds that of the correction approximates it uniformly on $\mathcal{K}$ \cite{hornik1991}.
-To compare the two models as differential equations, solve the two stator equations for $I_d$ and $I_q$ and substitute the solution into the remaining equations.
-The solution is unique and exact because the stator equations are linear in $I_d$ and $I_q$ with the positive determinant $R_a^2+X_d''X_q''$.
-The two sets of state equations then differ only through the network, by the approximation error divided by the rotor time constants, so for any $\varepsilon>0$ weights exist that keep the difference below $\varepsilon$ on $\mathcal{K}$.
-Both sets are smooth on the compact $\mathcal{K}$, hence Lipschitz, and the comparison bound for two differential equations whose right-hand sides differ by at most $\varepsilon$ gives the stated deviation from a common initial state \cite{khalil2002}.
-The terminal current is a smooth function of the state and the terminal voltage, so it deviates proportionally.
-\end{proof}
-
-The proposition concerns what the surrogate can represent, not what training will find.
-The port records of a reduced-order machine can be fitted with zero structural error for the two-axis and one-axis members, and with arbitrarily small trajectory error for the classical member.
-The parameter values in the proof are one such representation, not the only one.
-The damper time constants are arbitrary once the damper states decouple, and the correction $\bm{r}_{\bm{\theta}}$ can compensate a departure of the linear part, so many combinations of parameters and weights produce the same terminal behavior.
-Training therefore recovers the dynamics of a reduced-order machine without recovering the particular parameter values of the proof, and Section~\ref{M-ssec:exp_orders} of the main text confirms the recovery across the order spectrum at the level of the port behavior.
-By the same degeneracy, $X_d''$ and $X_q''$ are not identifiable on a reduced-order machine, and the surrogate claims no parameter recovery for them.
 
 \section{Gradient of the Port-Only Loss}\label{sec:grad}
 
