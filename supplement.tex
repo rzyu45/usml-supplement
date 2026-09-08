@@ -238,6 +238,36 @@ NPCC & 7 & 5 & 745\\
 \end{tabular}
 \end{table}
 
+\section{Fault Scenarios of the NPCC and 2224-Bus Studies}\label{sec:scenarios}
+
+Table~\ref{tab:scenarios} lists the fault scenarios of Figs.~\ref{M-fig:cct_npcc} and \ref{M-fig:cct_gb} of the main text.
+Every scenario is a three-phase fault at the bus in the column Fault, cleared by tripping the branch between the two buses in the column Branch.
+The label carries the faulted bus after F and the index of the tripped branch in the case file after L.
+The branch of F87-L230 is a transformer, and every other branch is a line.
+
+\begin{table}[!h]
+\caption{Fault Scenarios of the Two Large Systems}
+\label{tab:scenarios}
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lcclcc}
+\toprule
+\multicolumn{3}{c}{NPCC} & \multicolumn{3}{c}{2224-bus}\\
+\cmidrule(lr){1-3}\cmidrule(lr){4-6}
+Scenario & Fault & Branch & Scenario & Fault & Branch\\
+\midrule
+F85-L108 & 85 & 85--112 & F316-L302 & 316 & 316--163\\
+F87-L230 & 87 & 87--85 & F14-L308 & 14 & 14--344\\
+F115-L157 & 115 & 115--135 & F333-L293 & 333 & 333--98\\
+F133-L201 & 133 & 133--135 & F316-L260 & 316 & 316--98\\
+F135-L204 & 135 & 135--139 & F130-L316 & 130 & 130--350\\
+F131-L195 & 131 & 131--135 & F318-L1427 & 318 & 318--356\\
+F132-L197 & 132 & 132--133 & F318-L1428 & 318 & 318--357\\
+ & & & F40-L272 & 40 & 40--320\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
 
