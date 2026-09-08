@@ -33,6 +33,7 @@ Section~\ref{sec:proof} proves Proposition~\ref{M-prop:bounded} of the main text
 Section~\ref{sec:grad} gives the gradient of the port-only loss.
 Section~\ref{sec:ndf} gives the numerical differentiation formula and its residual equation.
 Section~\ref{sec:params} lists the parameters of the IEEE 14-bus case study.
+Section~\ref{sec:settings} lists the training settings and the sample counts of the case studies.
 Equation, section, table, and proposition numbers without the prefix S refer to the main text.
 
 \section{The Synchronous Machine Model Family}\label{sec:family}
@@ -208,6 +209,34 @@ The simplified Newton iteration that solves it is \eqref{M-eq:simp-newton} of th
 The five members of the family in Section~\ref{M-ssec:exp_orders} of the main text share the parameters of the machine at bus 2 of the IEEE 14-bus system \cite{milano2010}, namely $H=3.924$~s, $D=1.2$, $R_a=0.0052$, $X_d=1.75$, $X_q=1.633$, $X_d'=0.308$, $X_q'=0.6$, $X_d''=X_q''=0.217$, and $X_l=0$ in per unit, and $T_{d0}'=6.1$, $T_{q0}'=0.3$, $T_{d0}''=0.04$, and $T_{q0}''=0.099$~s.
 The GENROU setting adds the saturation factors $S_{1.0}=0.27$ and $S_{1.2}=1.14$.
 Every learnable parameter of the surrogate starts from these exact values.
+
+\section{Training Settings and Sample Counts}\label{sec:settings}
+
+The correction network \eqref{M-eq:rtheta} has two hidden layers of 64 units with the SiLU activation, and its output layer is zero-initialized.
+The bound is $\bm{c}=\bm{1}$, raised to $\bm{c}=3\cdot\bm{1}$ for the GENROU settings so that the saturation can be absorbed.
+In the loss \eqref{M-eq:loss}, the current and the speed are normalized by the standard deviation of the recorded quantity, the weight is $\lambda=1$, and the samples of the fault-on period are weighted by 3.
+Training uses AdamW for 1500 steps with a learning rate of $6\times10^{-3}$ for the weights and the parameters, $3\times10^{-2}$ for the latent $\delta_0$, a linear warm-up over the first $5\%$ of the steps, and a cosine decay to $2\%$ of the peak.
+Each step draws 128 windows of 2.5~s that start at the pre-fault steady state, and the surrogate is integrated by the fixed-step fourth-order Runge--Kutta scheme at the 1~ms sampling interval of the measurements.
+Table~\ref{tab:samples} lists the sample counts.
+The clearing times of the IEEE 14-bus study run from $0.10$ to $0.70$~s in steps of $0.03$~s, and those of the NPCC and 2224-bus studies form a grid across the critical clearing time of each scenario.
+One full-physics run supplies one trajectory for every recorded machine, so the NPCC runs are shared by the twelve surrogated machines and the runs of each 2224-bus family by its trained members.
+
+\begin{table}[!h]
+\caption{Sample Counts of the Case Studies}
+\label{tab:samples}
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Study & Scenarios & Loading levels & Runs\\
+\midrule
+IEEE 14-bus & 6 & 7 & 882\\
+IEEE 14-bus, GENROU & 6 & 4 & 504\\
+NPCC & 7 & 5 & 745\\
+2224-bus & 6 & 1 & 112\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
