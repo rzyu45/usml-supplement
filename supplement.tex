@@ -147,11 +147,11 @@ The rotor equations thus vary across references, machine types, and model orders
 Proposition~\ref{M-prop:bounded} of the main text bounds every trajectory of the learned rotor model \eqref{M-eq:closure}, for any network weights, by \eqref{M-eq:ultbound}.
 
 \begin{proof}
-Write \eqref{M-eq:closure} as $\dot{\bm{x}}_r=\bm{\Lambda}\bm{x}_r+\bm{w}(t)$ with $\bm{\Lambda}=\bm{T}^{-1}A$ and $\bm{w}=\bm{T}^{-1}\bigl(B\bm{u}_r+\bm{r}_{\bm{\theta}}\bigr)$.
-The output bound of \eqref{M-eq:rtheta} gives $\lvert r_{\bm{\theta},i}\rvert\le c_i$, so $\lVert\bm{w}(t)\rVert_2\le\bar{u}+\lVert\bm{T}^{-1}\bm{c}\rVert_2$ under the input bound $\lVert\bm{T}^{-1}B\bm{u}_r(t)\rVert_2\le\bar{u}$.
-Every eigenvalue of $\bm{\Lambda}$ is negative, so constants $k\ge1$ and $\lambda>0$ with $\lVert e^{\bm{\Lambda}t}\rVert_2\le ke^{-\lambda t}$ exist \cite{khalil2002}.
-The variation-of-constants formula gives $\bm{x}_r(t)=e^{\bm{\Lambda}t}\bm{x}_r(0)+\int_0^{t}e^{\bm{\Lambda}(t-s)}\bm{w}(s)\,\mathrm{d}s$.
-Bounding the integrand by $ke^{-\lambda(t-s)}\lVert\bm{w}\rVert_2$ and integrating yields \eqref{M-eq:ultbound}.
+Write \eqref{M-eq:closure} as $\dot{\bm{x}}_r=\bm{\Lambda}\bm{x}_r+\bm{p}(t)$ with $\bm{\Lambda}=\bm{T}^{-1}A$ and $\bm{p}=\bm{T}^{-1}\bigl(B\bm{u}_r+\bm{r}_{\bm{\theta}}\bigr)$.
+The output bound of \eqref{M-eq:rtheta} gives $\lvert r_{\bm{\theta},i}\rvert\le c_i$, so $\lVert\bm{p}(t)\rVert_2\le\bar{u}+\lVert\bm{T}^{-1}\bm{c}\rVert_2$ under the input bound $\lVert\bm{T}^{-1}B\bm{u}_r(t)\rVert_2\le\bar{u}$.
+Every eigenvalue of $\bm{\Lambda}$ is negative, so constants $\gamma\ge1$ and $\lambda>0$ with $\lVert e^{\bm{\Lambda}t}\rVert_2\le \gamma e^{-\lambda t}$ exist \cite{khalil2002}.
+The variation-of-constants formula gives $\bm{x}_r(t)=e^{\bm{\Lambda}t}\bm{x}_r(0)+\int_0^{t}e^{\bm{\Lambda}(t-\tau)}\bm{p}(\tau)\,\mathrm{d}\tau$.
+Bounding the integrand by $\gamma e^{-\lambda(t-\tau)}\lVert\bm{p}\rVert_2$ and integrating yields \eqref{M-eq:ultbound}.
 \end{proof}
 
 \section{Gradient of the Port-Only Loss}\label{sec:grad}
@@ -186,19 +186,19 @@ It is the only term that reaches $\bm{X}$, and it adds to the gradient that the 
 
 \section{The Numerical Differentiation Formula}\label{sec:ndf}
 
-Write $\bm{z}=[\bm{x}^\top,\bm{y}^\top]^\top$ for the full unknown vector of the DAE \eqref{M-eq:dae}, $\bm{F}=[\bm{f}^\top,\bm{g}^\top]^\top$ for its right-hand side, and $M=\operatorname{diag}(I,0)$ for the mass matrix, so that the DAE is $M\dot{\bm{z}}=\bm{F}(t,\bm{z})$.
+Write $\bm{w}=[\bm{x}^\top,\bm{y}^\top]^\top$ for the full unknown vector of the DAE \eqref{M-eq:dae}, $\bm{F}=[\bm{f}^\top,\bm{g}^\top]^\top$ for its right-hand side, and $M=\operatorname{diag}(I,0)$ for the mass matrix, so that the DAE is $M\dot{\bm{w}}=\bm{F}(t,\bm{w})$.
 The step from $t_n$ to $t_{n+1}$ is taken by the numerical differentiation formula (NDF) of order $k$ \cite{klopfensteinNumericalDifferentiationFormulas1971},
 \begin{equation}\label{eq:ndf}
-M\Bigl(\sum_{m=1}^{k}\frac{1}{m}\nabla^m\bm{z}_{n+1}-\kappa\gamma_k\nabla^{k+1}\bm{z}_{n+1}\Bigr)
-=h\bm{F}(t_{n+1},\bm{z}_{n+1}),
+M\Bigl(\sum_{m=1}^{k}\frac{1}{m}\nabla^m\bm{w}_{n+1}-\kappa\gamma_k\nabla^{k+1}\bm{w}_{n+1}\Bigr)
+=h\bm{F}(t_{n+1},\bm{w}_{n+1}),
 \end{equation}
-where $h$ is the step size, $\nabla$ is the backward difference operator with $\nabla^0\bm{z}_n=\bm{z}_n$ and $\nabla^{j+1}\bm{z}_n=\nabla^j\bm{z}_n-\nabla^j\bm{z}_{n-1}$, $\gamma_k=\sum_{j=1}^{k}1/j$, and $\kappa$ is the damping coefficient that lowers the leading truncation term.
-With the predictor $\bm{z}_{n+1}^{(0)}=\sum_{m=0}^{k}\nabla^m\bm{z}_n$, equation \eqref{eq:ndf} becomes the residual equation \eqref{M-eq:ndf-resid} of the main text,
+where $h$ is the step size, $\nabla$ is the backward difference operator with $\nabla^0\bm{w}_n=\bm{w}_n$ and $\nabla^{j+1}\bm{w}_n=\nabla^j\bm{w}_n-\nabla^j\bm{w}_{n-1}$, $\gamma_k=\sum_{j=1}^{k}1/j$, and $\kappa$ is the damping coefficient that lowers the leading truncation term.
+With the predictor $\bm{w}_{n+1}^{(0)}=\sum_{m=0}^{k}\nabla^m\bm{w}_n$, equation \eqref{eq:ndf} becomes the residual equation \eqref{M-eq:ndf-resid} of the main text,
 \begin{equation}\label{eq:ndf-resid}
 \begin{aligned}
-\bm{G}(\bm{z})&=M\bigl(\bm{z}-\bm{z}_{n+1}^{(0)}+\bm{\Psi}\bigr)-\alpha_k\bm{F}(t_{n+1},\bm{z})=\bm{0},\\
+\bm{G}(\bm{w})&=M\bigl(\bm{w}-\bm{w}_{n+1}^{(0)}+\bm{\Psi}\bigr)-\alpha_k\bm{F}(t_{n+1},\bm{w})=\bm{0},\\
 \alpha_k&=\frac{h}{(1-\kappa)\gamma_k},\qquad
-\bm{\Psi}=\frac{1}{(1-\kappa)\gamma_k}\sum_{m=1}^{k}\gamma_m\nabla^m\bm{z}_n,
+\bm{\Psi}=\frac{1}{(1-\kappa)\gamma_k}\sum_{m=1}^{k}\gamma_m\nabla^m\bm{w}_n,
 \end{aligned}
 \end{equation}
 which is one nonlinear system per step.
@@ -214,7 +214,7 @@ Every learnable parameter of the surrogate starts from these exact values.
 
 The correction network \eqref{M-eq:rtheta} has two hidden layers of 64 units with the SiLU activation, and its output layer is zero-initialized.
 The bound is $\bm{c}=\bm{1}$, raised to $\bm{c}=3\cdot\bm{1}$ for the GENROU settings so that the saturation can be absorbed.
-In the loss \eqref{M-eq:loss}, the current and the speed are normalized by the standard deviation of the recorded quantity, the weight is $\lambda=1$, and the samples of the fault-on period are weighted by 3.
+In the loss \eqref{M-eq:loss}, the current and the speed are normalized by the standard deviation of the recorded quantity, the weight is $\mu=1$, and the samples of the fault-on period are weighted by 3.
 Training uses AdamW for 1500 steps with a learning rate of $6\times10^{-3}$ for the weights and the parameters, $3\times10^{-2}$ for the latent $\delta_0$, a linear warm-up over the first $5\%$ of the steps, and a cosine decay to $2\%$ of the peak.
 Each step draws 128 windows of 2.5~s that start at the pre-fault steady state, and the surrogate is integrated by the fixed-step fourth-order Runge--Kutta scheme at the 1~ms sampling interval of the measurements.
 Table~\ref{tab:samples} lists the sample counts.
