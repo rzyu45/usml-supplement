@@ -23,13 +23,13 @@
 \citation{wangConvergenceEnhancementNeural2025}
 \citation{venturanadalPhysicsInformedNeuralNetworks2025}
 \citation{bossartAccelerationPowerSystem2025b}
-\citation{venturanadalPhysicsInformedNeuralNetworks2025,bossartAccelerationPowerSystem2025b}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
 \newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
 \citation{milano2010,sauer2018}
 \citation{milano2010}
 \citation{milano2010,sauer2018}
 \citation{sauer2018}
+\citation{cui2021}
 \citation{cui2021}
 \citation{yu2026supplement}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation}{2}{section.2}\protected@file@percent }
@@ -46,7 +46,12 @@
 \newlabel{eq:stator}{{3c}{2}{The Synchronous Machine Models}{equation.3c}{}}
 \newlabel{eq:stator-q}{{3d}{2}{The Synchronous Machine Models}{equation.3d}{}}
 \newlabel{eq:torque}{{3e}{2}{The Synchronous Machine Models}{equation.3e}{}}
-\newlabel{eq:sp-emf}{{3f}{2}{The Synchronous Machine Models}{equation.3f}{}}
+\newlabel{eq:sp}{{3f}{2}{The Synchronous Machine Models}{equation.3f}{}}
+\newlabel{eq:sp-ed}{{3g}{2}{The Synchronous Machine Models}{equation.3g}{}}
+\newlabel{eq:sp-p1d}{{3h}{2}{The Synchronous Machine Models}{equation.3h}{}}
+\newlabel{eq:sp-p2q}{{3i}{2}{The Synchronous Machine Models}{equation.3i}{}}
+\newlabel{eq:sp-emf}{{3j}{2}{The Synchronous Machine Models}{equation.3j}{}}
+\newlabel{eq:sat}{{3k}{2}{The Synchronous Machine Models}{equation.3k}{}}
 \citation{milano2010,sauer2018}
 \citation{sauer2018}
 \citation{milano2010}
@@ -57,8 +62,6 @@
 \citation{milano2010}
 \citation{milano2010}
 \citation{cui2021}
-\citation{zhangLearningPowerSystem2024}
-\citation{IEEEStandardSynchrophasor}
 \citation{milano2010,sauer2018}
 \citation{venturanadalPhysicsInformedNeuralNetworks2025,bossartAccelerationPowerSystem2025b}
 \citation{xiaoFeasibilityStudyNeural2023}
@@ -67,11 +70,10 @@
 \newlabel{fig:structure}{{1}{3}{Structure of the synchronous machine model and of its surrogate}{figure.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces The Synchronous Machine Model Family}}{3}{table.1}\protected@file@percent }
 \newlabel{tab:variants}{{I}{3}{The Synchronous Machine Model Family}{table.1}{}}
-\newlabel{eq:blackbox}{{4}{3}{The Synchronous Machine Models}{equation.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}The Computational Burden of a Neural Surrogate in TDS}{3}{subsection.2.3}\protected@file@percent }
 \newlabel{ssec:burden}{{\mbox  {II-C}}{3}{The Computational Burden of a Neural Surrogate in TDS}{subsection.2.3}{}}
-\newlabel{eq:direct}{{5}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.5}{}}
-\newlabel{eq:alternating}{{6}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.6}{}}
+\newlabel{eq:simultaneous}{{4}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.4}{}}
+\newlabel{eq:alternating}{{5}{3}{The Computational Burden of a Neural Surrogate in TDS}{equation.5}{}}
 \citation{chenNeuralOrdinaryDifferential2018}
 \citation{yu2026supplement}
 \citation{hornik1991}
@@ -83,34 +85,34 @@
 \newlabel{ssec:structure}{{\mbox  {III-A}}{4}{The Surrogate Architecture}{subsection.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}The Learned Rotor Model}{4}{subsection.3.2}\protected@file@percent }
 \newlabel{ssec:rotor}{{\mbox  {III-B}}{4}{The Learned Rotor Model}{subsection.3.2}{}}
-\newlabel{eq:closure}{{7}{4}{The Learned Rotor Model}{equation.7}{}}
-\newlabel{eq:AB}{{8}{4}{The Learned Rotor Model}{equation.8}{}}
-\newlabel{eq:rtheta}{{9}{4}{The Learned Rotor Model}{equation.9}{}}
+\newlabel{eq:closure}{{6}{4}{The Learned Rotor Model}{equation.6}{}}
+\newlabel{eq:AB}{{7}{4}{The Learned Rotor Model}{equation.7}{}}
+\newlabel{eq:rtheta}{{8}{4}{The Learned Rotor Model}{equation.8}{}}
 \newlabel{prop:bounded}{{1}{4}{}{proposition.1}{}}
-\newlabel{eq:ultbound}{{10}{4}{}{equation.10}{}}
+\newlabel{eq:ultbound}{{9}{4}{}{equation.9}{}}
 \citation{milano2010}
 \citation{yu2026supplement}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}The Initial Value of the Latent Variables}{5}{subsection.3.3}\protected@file@percent }
-\newlabel{ssec:delta0}{{\mbox  {III-C}}{5}{The Initial Value of the Latent Variables}{subsection.3.3}{}}
-\newlabel{eq:phasor}{{11}{5}{The Initial Value of the Latent Variables}{equation.11}{}}
-\newlabel{eq:ic-park}{{12}{5}{The Initial Value of the Latent Variables}{equation.12}{}}
-\newlabel{eq:strict-ic}{{13}{5}{The Initial Value of the Latent Variables}{equation.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}The Initial Value of the Latent Variable}{5}{subsection.3.3}\protected@file@percent }
+\newlabel{ssec:delta0}{{\mbox  {III-C}}{5}{The Initial Value of the Latent Variable}{subsection.3.3}{}}
+\newlabel{eq:phasor}{{10}{5}{The Initial Value of the Latent Variable}{equation.10}{}}
+\newlabel{eq:ic-park}{{11}{5}{The Initial Value of the Latent Variable}{equation.11}{}}
+\newlabel{eq:strict-ic}{{12}{5}{The Initial Value of the Latent Variable}{equation.12}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Training from Terminal Measurements}{5}{subsection.3.4}\protected@file@percent }
 \newlabel{ssec:training}{{\mbox  {III-D}}{5}{Training from Terminal Measurements}{subsection.3.4}{}}
-\newlabel{eq:loss}{{14}{5}{Training from Terminal Measurements}{equation.14}{}}
+\newlabel{eq:loss}{{13}{5}{Training from Terminal Measurements}{equation.13}{}}
 \citation{klopfensteinNumericalDifferentiationFormulas1971}
 \citation{yu2026supplement}
 \citation{yuEfficientGenericCosimulation2026}
 \citation{yu2026supplement}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Surrogate Spliced Direct Simulation}{6}{section.4}\protected@file@percent }
-\newlabel{sec:spliced}{{IV}{6}{Surrogate Spliced Direct Simulation}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Surrogate Spliced Simultaneous Simulation}{6}{section.4}\protected@file@percent }
+\newlabel{sec:spliced}{{IV}{6}{Surrogate Spliced Simultaneous Simulation}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}The Integrator and Its Simplified Newton Iteration}{6}{subsection.4.1}\protected@file@percent }
 \newlabel{ssec:ndf}{{\mbox  {IV-A}}{6}{The Integrator and Its Simplified Newton Iteration}{subsection.4.1}{}}
-\newlabel{eq:ndf-resid}{{15}{6}{The Integrator and Its Simplified Newton Iteration}{equation.15}{}}
-\newlabel{eq:simp-newton}{{16}{6}{The Integrator and Its Simplified Newton Iteration}{equation.16}{}}
+\newlabel{eq:ndf-resid}{{14}{6}{The Integrator and Its Simplified Newton Iteration}{equation.14}{}}
+\newlabel{eq:simp-newton}{{15}{6}{The Integrator and Its Simplified Newton Iteration}{equation.15}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Symbolic Differentiation of the Learned Rotor Model}{6}{subsection.4.2}\protected@file@percent }
 \newlabel{ssec:symdiff}{{\mbox  {IV-B}}{6}{Symbolic Differentiation of the Learned Rotor Model}{subsection.4.2}{}}
-\newlabel{eq:symjac}{{17}{6}{Symbolic Differentiation of the Learned Rotor Model}{equation.17}{}}
+\newlabel{eq:symjac}{{16}{6}{Symbolic Differentiation of the Learned Rotor Model}{equation.16}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Joint Value and Jacobian Evaluation of a Feed-Forward Network by Symbolic Differentiation}}{6}{algorithm.1}\protected@file@percent }
 \newlabel{alg:symdiff}{{1}{6}{Symbolic Differentiation of the Learned Rotor Model}{algorithm.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Case Study}{6}{section.5}\protected@file@percent }
